@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X 视频浏览 — 登录后查看</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>X 视频浏览</h1>
+      <p>官方 OAuth 登录 · 拉取你账户中的视频帖子</p>
+    </div>
+    <div id="auth-area" class="user-box"></div>
+  </header>
+
+  <main class="layout">
+    <div id="setup-alert" class="alert warn" hidden>
+      <strong>需要先配置 X 开发者应用</strong>
+      <ol class="setup-steps">
+        <li>打开 <a href="https://developer.x.com" target="_blank" rel="noreferrer">developer.x.com</a> 注册并创建 App</li>
+        <li>在 App 设置里添加 Callback URL：<code id="callback-hint">http://localhost:3000/api/auth/callback</code></li>
+        <li>启用 OAuth 2.0，类型选 Web App / Confidential Client</li>
+        <li>复制 <code>Client ID</code> 与 <code>Client Secret</code> 到项目 <code>.env</code> 文件</li>
+        <li>在项目目录运行 <code>npm install</code> 后执行 <code>npm start</code></li>
+      </ol>
+    </div>
+
+    <div id="limit-alert" class="alert warn">
+      <strong>关于「推荐视频」</strong><br />
+      X 官方 API <strong>不提供</strong> App 里「为你推荐」的算法流。
+      本页可查看：<strong>首页时间线</strong>（你关注的人发的视频，时间倒序）和<strong>我的赞</strong>（你点赞过的视频）。
+    </div>
+
+    <div id="error-alert" class="alert error" hidden></div>
+
+    <section id="feed-section" hidden>
+      <div class="tabs">
+        <button class="tab active" data-source="home">首页时间线视频</button>
+        <button class="tab" data-source="likes">我的赞（视频）</button>
+      </div>
+
+      <div class="toolbar">
+        <p id="feed-meta" class="meta"></p>
+        <button id="refresh-btn" class="btn btn-ghost" type="button">刷新</button>
+      </div>
+
+      <div id="video-grid" class="grid"></div>
+      <p id="empty-state" class="empty" hidden>没有找到含视频的帖子</p>
+    </section>
+
+    <section id="login-section" class="empty">
+      <p>登录你的 X 账户后，即可浏览时间线或点赞中的视频。</p>
+      <button id="login-btn" class="btn btn-primary" type="button">使用 X 账户登录</button>
+    </section>
+  </main>
+
+  <div id="player-modal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <strong id="modal-title">播放视频</strong>
+        <button id="modal-close" class="btn btn-ghost" type="button">关闭</button>
+      </div>
+      <video id="modal-video" controls playsinline></video>
+      <p id="modal-fallback" class="meta" hidden>
+        无法直接播放时，可
+        <a id="modal-tweet-link" href="#" target="_blank" rel="noreferrer">在 X 上打开原帖</a>
+        或使用下方嵌入。
+      </p>
+      <div id="embed-container"></div>
+    </div>
+  </div>
+
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
