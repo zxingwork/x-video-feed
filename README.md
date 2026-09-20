@@ -1,8 +1,11 @@
 # X Video Exporter — Privacy Policy
 
-Published privacy policy for the Chrome extension「X 视频导出器」(X Video Exporter).
+「X 视频导出器」Chrome 扩展的隐私权政策页(中英双语,自包含单文件)。
 
-- 中文 / English: https://zxingwork.github.io/xvid-ext-privacy/
-- 反馈 / Contact: https://github.com/zxingwork/xvid-ext-privacy/issues
+Published at: **https://zxingwork.github.io/x-video-feed/**
+Source of truth: `D:\Hermes_workspace\store-assets\privacy-policy.html`
 
-Source of truth: `index.html` (single self-contained file, no external resources).
+发布方式:把 index.html 推到本仓库的 `gh-pages` 分支,GitHub Pages 自动构建。
+更新政策 = 改 store-assets\privacy-policy.html → 复制为 index.html → commit → push gh-pages。
+
+Feedback: https://github.com/zxingwork/x-video-feed/issues
